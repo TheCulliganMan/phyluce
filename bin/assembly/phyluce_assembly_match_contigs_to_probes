@@ -107,7 +107,7 @@ def create_probe_database(log, db, organisms, uces):
     c = conn.cursor()
     c.execute("PRAGMA foreign_keys = ON")
     try:
-        create_string = [org + ' text' for org in organisms]
+        create_string = ['`{}` text'.format(org) for org in organisms]
         query = "CREATE TABLE matches (uce text primary key, {0})".format(','.join(create_string))
         c.execute(query)
         query = "CREATE TABLE match_map (uce text primary key, {0})".format(','.join(create_string))
@@ -137,11 +137,11 @@ def store_lastz_results_in_db(c, matches, orientation, critter):
         # We should have dropped all duplicates at this point
         assert len(match) == 1, "More than one match"
         item = list(match)[0]
-        insert_string = "UPDATE matches SET {0} = 1 WHERE uce = '{1}'".format(critter, item)
+        insert_string = "UPDATE matches SET `{0}` = 1 WHERE uce = '{1}'".format(critter, item)
         c.execute(insert_string)
         #pdb.set_trace()
         orient_key = "{0}({1})".format(key, list(orientation[item])[0])
-        insert_string = "UPDATE match_map SET {0} = '{1}' WHERE uce = '{2}'".format(critter, orient_key, item)
+        insert_string = "UPDATE match_map SET `{0}` = '{1}' WHERE uce = '{2}'".format(critter, orient_key, item)
         c.execute(insert_string)
 
 
