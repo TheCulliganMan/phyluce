@@ -158,9 +158,9 @@ def get_all_matches_by_organism(c, organisms):
     organismal_matches = {}
     for organism in organisms:
         if not organism.endswith('*'):
-            c.execute("SELECT uce FROM matches WHERE {0} = 1".format(organism))
+            c.execute("SELECT uce FROM matches WHERE `{0}` = 1".format(organism))
         else:
-            c.execute("SELECT uce FROM extended.matches WHERE {0} = 1".format(organism.rstrip('*')))
+            c.execute("SELECT uce FROM extended.matches WHERE `{0}` = 1".format(organism.rstrip('*')))
         matches = set([uce[0] for uce in c.fetchall()])
         # we've removed dupe UCE matches, but we need to remove
         # dupe node matches (i,e. we've removed dupe target matches
