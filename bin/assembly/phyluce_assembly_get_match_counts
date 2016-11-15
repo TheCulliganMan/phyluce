@@ -139,10 +139,10 @@ def get_names_from_config(config, group):
 
 def remove_duplicates_from(c, organism, matches):
     if not organism.endswith('*'):
-        st = "SELECT uce, {0} FROM match_map WHERE uce in ({1})"
+        st = "SELECT uce, `{0}` FROM match_map WHERE uce in ({1})"
         query = st.format(organism, ','.join(["'{0}'".format(i) for i in matches]))
     else:
-        st = "SELECT uce, {0} FROM extended.match_map WHERE uce in ({1})"
+        st = "SELECT uce, `{0}` FROM extended.match_map WHERE uce in ({1})"
         query = st.format(organism.rstrip('*'), ','.join(["'{0}'".format(i) for i in matches]))
     c.execute(query)
     data = c.fetchall()
