@@ -100,9 +100,9 @@ def get_nodes_for_uces(c, organism, uces, extend=False, notstrict=False):
     # get only those UCEs we know are in the set
     uces = [("\'{0}\'").format(u) for u in uces]
     if not extend:
-        query = "SELECT lower({0}), uce FROM match_map where uce in ({1})".format(organism, ','.join(uces))
+        query = "SELECT lower(`{0}`), uce FROM match_map where uce in ({1})".format(organism, ','.join(uces))
     else:
-        query = "SELECT lower({0}), uce FROM extended.match_map where uce in ({1})".format(organism, ','.join(uces))
+        query = "SELECT lower(`{0}`), uce FROM extended.match_map where uce in ({1})".format(organism, ','.join(uces))
     c.execute(query)
     rows = c.fetchall()
     node_dict = defaultdict()
