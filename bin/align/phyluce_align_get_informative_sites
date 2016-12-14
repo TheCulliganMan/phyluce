@@ -59,10 +59,8 @@ def get_args():
 
 def get_files(input_dir, input_format):
     alignments = []
-    print(input_dir, input_format)
     for ftype in get_file_extensions(input_format):
         alignments.extend(glob.glob(os.path.join(input_dir, "*{}".format(ftype))))
-    print(alignments)
     return alignments
 
 
